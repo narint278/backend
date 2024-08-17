@@ -159,6 +159,19 @@ app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 
+// Route สำหรับการดึงข้อมูล chats ทั้งหมด
+app.get("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
+  const userId = req.auth.userId;
+
+  try {
+    const chats = await Chat.find({ userId });
+    res.status(200).send(chats);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error fetching chats!");
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(401).send("Unauthenticated!");
