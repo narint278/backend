@@ -177,4 +177,9 @@ app.use((err, req, res, next) => {
 //   res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
 // });
 
+app.get("/", (req, res) => {
+  res.send("Hello, World! This is the home page.");
+});
+
+
 connectAndStartServer();
